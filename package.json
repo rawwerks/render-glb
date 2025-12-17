@@ -1,6 +1,6 @@
 {
   "name": "render-glb",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Render GLB 3D models to PNG images using headless WebGL",
   "main": "src/index.cjs",
   "bin": {

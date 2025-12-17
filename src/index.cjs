@@ -14,8 +14,8 @@ const path = require("path");
 const args = process.argv.slice(2);
 let inputPath = null;
 let outputPath = null;
-let width = 512;
-let height = 512;
+let width = 1024;
+let height = 1024;
 
 for (let i = 0; i < args.length; i++) {
   if (args[i] === "--width" && args[i + 1]) {
@@ -30,8 +30,8 @@ for (let i = 0; i < args.length; i++) {
 Usage: render-glb <input.glb> <output.png> [options]
 
 Options:
-  --width N    Output image width (default: 512)
-  --height N   Output image height (default: 512)
+  --width N    Output image width (default: 1024)
+  --height N   Output image height (default: 1024)
   --help, -h   Show this help message
 
 Examples:
@@ -91,9 +91,8 @@ async function render() {
   renderer.setSize(width, height);
   renderer.setClearColor(0xf0f0f0, 1); // Light gray background
 
-  // Setup scene and camera
+  // Setup scene (camera created after model loads to set proper near/far)
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
 
   // Load GLB file
   const loader = new GLTFLoader();
@@ -111,7 +110,16 @@ async function render() {
   const center = box.getCenter(new THREE.Vector3());
   const size = box.getSize(new THREE.Vector3());
   const maxDim = Math.max(size.x, size.y, size.z);
-  const distance = maxDim * 2;
+
+  // Handle tiny models: ensure minimum practical size for camera
+  const effectiveSize = Math.max(maxDim, 0.001);
+  const distance = effectiveSize * 2.5;
+
+  // Dynamic near/far planes based on model size (prevents clipping tiny models)
+  const near = effectiveSize * 0.01;
+  const far = effectiveSize * 100;
+
+  const camera = new THREE.PerspectiveCamera(50, width / height, near, far);
 
   // Position camera at isometric angle
   camera.position.set(

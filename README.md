@@ -16,9 +16,10 @@ Render GLB (glTF 2.0 Binary) 3D models to PNG images using headless WebGL.
 npm install -g render-glb
 ```
 
-Or use directly with npx:
+Or use directly with bunx/npx (no install needed):
 
 ```bash
+bunx render-glb model.glb output.png
 npx render-glb model.glb output.png
 ```
 
@@ -28,10 +29,12 @@ npx render-glb model.glb output.png
 render-glb <input.glb> <output.png> [options]
 
 Options:
-  --width N    Output image width (default: 512)
-  --height N   Output image height (default: 512)
+  --width N    Output image width (default: 1024)
+  --height N   Output image height (default: 1024)
   --help, -h   Show help message
 ```
+
+**Auto-scaling:** The camera automatically adjusts to fit any model size, from millimeter-scale parts to large assemblies.
 
 ### Examples
 

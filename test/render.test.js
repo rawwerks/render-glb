@@ -18,8 +18,8 @@ describe("render-glb", () => {
     const json = JSON.parse(result.trim());
 
     assert.strictEqual(json.success, true);
-    assert.strictEqual(json.width, 512);
-    assert.strictEqual(json.height, 512);
+    assert.strictEqual(json.width, 1024);
+    assert.strictEqual(json.height, 1024);
     assert.ok(json.size_bytes > 0);
     assert.ok(fs.existsSync(output));
 
