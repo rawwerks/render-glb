@@ -1,0 +1,35 @@
+{
+  "name": "render-glb",
+  "version": "0.1.0",
+  "description": "Render GLB 3D models to PNG images using headless WebGL",
+  "main": "src/index.cjs",
+  "bin": {
+    "render-glb": "./src/index.cjs"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "keywords": [
+    "glb",
+    "gltf",
+    "png",
+    "render",
+    "3d",
+    "webgl",
+    "headless",
+    "three.js"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "gl": "^8.1.6",
+    "jsdom": "^27.0.0",
+    "node-three-gltf": "^2.1.0",
+    "pngjs": "^7.0.0",
+    "three": "^0.156.0"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18"
+  }
+}
